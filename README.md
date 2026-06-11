@@ -1,62 +1,111 @@
 # MarkdownSlides
 
-I got tired of using PowerPoint for everything. This is a browser-based presentation tool where you just write markdown and it turns into slides automatically. No accounts, no cloud, no installs — just open the HTML file and start typing.
+A browser-based Markdown presentation builder. Write slides in Markdown, preview them live, and present full-screen — no installs, no build tools, just open and go.
 
-Built this over a weekend because I needed to make a project demo and didn't want to sit there dragging boxes around in PowerPoint for an hour.
+## Features
 
-## What it does
+- **Live split-pane editor** — write Markdown on the left, see rendered slides on the right
+- **Slide separator** — use `---` to split your content into individual slides
+- **5 built-in themes** — Default, Dark, Solarized, Moon, Sky
+- **Font choices** — Sans, Serif, Monospace
+- **Fullscreen presentation mode** — keyboard + touch navigation, progress bar
+- **Slide thumbnails** — visual strip below the preview
+- **Syntax highlighting** — code blocks with basic coloring for JS/HTML/CSS
+- **Export to HTML** — self-contained single-file export with navigation
+- **Export to PDF** — opens a print dialog with print-ready layout
+- **Autosave** — saves your work to localStorage automatically every 30s
+- **Presentation history** — keeps the last 10 saved files
+- **Draggable divider** — resize editor and preview panes
+- **Toolbar shortcuts** — insert bold, italic, code, lists, links, images with one click
+- **Keyboard shortcuts** — Ctrl+S save, Ctrl+P present, F5 fullscreen, Tab indents
+- **Speaker notes** — add `<!-- notes ... -->` comments, they show in preview
+- **Per-slide metadata** — override background color/image and layout per slide with `{key: value}` syntax
+- **Global frontmatter** — YAML-like frontmatter block at the top for global settings
 
-- Write slides in markdown, see them render live on the right
-- `---` separates slides
-- Supports code blocks with syntax highlighting
-- Fullscreen presentation mode (press `F` or click the button)
-- Keyboard navigation (`←` `→` arrows)
-- Export to PDF from the browser print dialog
-- Works 100% offline — no internet needed after download
-
-## How to use it
-
-Just download the repo and open `index.html` in your browser. That's literally it.
+## File Structure
 
 ```
-git clone https://github.com/AadhhyaSharma/MarkdownSlides
-cd MarkdownSlides
-# open index.html in your browser
+MarkdownSlides/
+├── index.html           # App shell and layout
+├── styles/
+│   ├── main.css         # Core layout, editor, preview, presentation overlay
+│   ├── themes.css       # Theme color palettes and font families
+│   └── highlight.css    # Code syntax highlight classes
+└── src/
+    ├── parser.js        # Markdown → slide objects, frontmatter, speaker notes
+    ├── renderer.js      # DOM rendering, thumbnails, theme/font application
+    ├── editor.js        # Textarea editor, keyboard shortcuts, divider resize
+    ├── presentation.js  # Fullscreen mode, keyboard/touch navigation, progress bar
+    ├── storage.js       # localStorage autosave, history, settings
+    ├── export.js        # HTML and PDF export
+    └── app.js           # App bootstrap, event wiring, state management
 ```
 
-No npm, no pip, no setup. One file, runs anywhere.
+## How to Use
 
-## Slide syntax
+1. Clone or download and open `index.html` in a browser
+2. Write your presentation in the editor — use `---` on its own line to separate slides
+3. Choose a theme and font from the top bar
+4. Click **▶ Present** (or press F5) to go fullscreen
+5. Navigate with arrow keys or swipe on touch devices
+6. Press **Esc** to exit
+7. Use **Export HTML** to get a portable single-file version
+
+## Markdown Syntax
+
+| Syntax | Result |
+|--------|--------|
+| `# Heading` | Slide title |
+| `**bold**` / `*italic*` | Formatting |
+| `- item` | Bullet list |
+| `` `code` `` | Inline code |
+| ` ```js ... ``` ` | Code block with highlight |
+| `---` | Slide separator |
+| `![alt](url)` | Image |
+| `[text](url)` | Link |
+| `> quote` | Blockquote |
+
+## Per-Slide Metadata
+
+Add a metadata line at the top of a slide to override its appearance:
+
+```
+{layout: cover, background: #1a1a2e, color: #ffffff}
+# Title Slide
+```
+
+Supported keys: `layout` (center / top / split / cover), `background` (hex or image URL), `color`
+
+## Speaker Notes
 
 ```markdown
-# My Presentation
+# My Slide
 
-First slide content here
+Content here
 
----
-
-## Second Slide
-
-- bullet point
-- another point
-
----
-
-## Code Slide
-
-\`\`\`python
-print("hello world")
-\`\`\`
+<!-- notes
+These notes are visible in preview but hidden during presentation.
+-->
 ```
 
-## Why not just use Reveal.js or Marp?
+## Keyboard Shortcuts
 
-Those are great tools honestly. But I wanted to understand how a slide engine actually works under the hood, so I built one from scratch. It's about 400 lines of vanilla JS and I learned a lot doing it.
+| Key | Action |
+|-----|--------|
+| Ctrl+S | Save / download .md |
+| Ctrl+P | Start presentation |
+| F5 | Fullscreen presentation |
+| Ctrl+N | Add new slide |
+| Ctrl+B | Bold selected text |
+| Ctrl+I | Italic selected text |
+| Tab | Insert 2 spaces |
+| ← / → (present) | Navigate slides |
+| Esc | Exit presentation |
 
-## Tech
+## Tech Stack
 
-Pure HTML/CSS/JS. Zero dependencies, zero build step. Marked.js for markdown parsing, Highlight.js for code blocks — both bundled inline so it works offline.
+Vanilla JavaScript (ES5/ES6), HTML5, CSS3, localStorage API. No frameworks, no npm, no build step. Uses [marked.js](https://marked.js.org/) for Markdown parsing.
 
----
+## License
 
-Made this for personal use, figured someone else might find it useful too. Issues and PRs welcome.
+MIT

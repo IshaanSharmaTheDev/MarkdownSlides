@@ -1,0 +1,6 @@
+/* highlight.css — Code block styling */
+pre code { display: block; overflow-x: auto; line-height: 1.6; }
+.hl-kw  { color: #c678dd; }
+.hl-str { color: #98c379; }
+.hl-num { color: #d19a66; }
+.hl-comment { color: #5c6370; font-style: italic; }

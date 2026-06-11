@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarkdownSlides — Live Markdown Presentation Builder</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/themes.css" />
+  <link rel="stylesheet" href="styles/highlight.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="logo">📝 MarkdownSlides</span>
+        <div class="file-actions">
+          <button id="btn-new" title="New presentation">New</button>
+          <button id="btn-open" title="Open file">Open</button>
+          <button id="btn-save" title="Save file">Save</button>
+          <button id="btn-export-html" title="Export as HTML">Export HTML</button>
+          <button id="btn-export-pdf" title="Export as PDF">Export PDF</button>
+          <input type="file" id="file-input" accept=".md,.txt" style="display:none" />
+        </div>
+      </div>
+      <div class="topbar-center">
+        <span id="slide-counter">Slide 1 / 1</span>
+        <span id="filename-display">untitled.md</span>
+      </div>
+      <div class="topbar-right">
+        <select id="theme-select">
+          <option value="default">Theme: Default</option>
+          <option value="dark">Dark</option>
+          <option value="solarized">Solarized</option>
+          <option value="moon">Moon</option>
+          <option value="sky">Sky</option>
+        </select>
+        <select id="font-select">
+          <option value="sans">Sans</option>
+          <option value="serif">Serif</option>
+          <option value="mono">Mono</option>
+        </select>
+        <button id="btn-present" class="btn-primary">▶ Present</button>
+        <button id="btn-help">?</button>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <div class="editor-pane" id="editor-pane">
+        <div class="pane-header">
+          <span>Editor</span>
+          <div class="editor-tools">
+            <button class="tool-btn" data-insert="# " title="Heading">H</button>
+            <button class="tool-btn" data-insert="**bold**" title="Bold"><b>B</b></button>
+            <button class="tool-btn" data-insert="*italic*" title="Italic"><i>I</i></button>
+            <button class="tool-btn" data-insert="\`code\`" title="Inline code">{ }</button>
+            <button class="tool-btn" data-insert="- " title="List">≡</button>
+            <button class="tool-btn" data-insert="[link](url)" title="Link">🔗</button>
+            <button class="tool-btn" data-insert="![alt](url)" title="Image">🖼</button>
+            <button class="tool-btn" id="btn-add-slide" title="Add slide">+ Slide</button>
+          </div>
+        </div>
+        <textarea id="editor" spellcheck="false" placeholder="Write your slides in Markdown. Use --- to separate slides."></textarea>
+        <div class="editor-status">
+          <span id="char-count">0 chars</span>
+          <span id="word-count">0 words</span>
+          <span id="line-count">0 lines</span>
+          <span id="autosave-status">●</span>
+        </div>
+      </div>
+
+      <div class="divider" id="divider"></div>
+
+      <div class="preview-pane" id="preview-pane">
+        <div class="pane-header">
+          <span>Preview</span>
+          <div class="preview-nav">
+            <button id="btn-prev">◀ Prev</button>
+            <button id="btn-next">Next ▶</button>
+          </div>
+        </div>
+        <div class="slide-preview-container">
+          <div class="slide-preview" id="slide-preview"></div>
+        </div>
+        <div class="slide-thumbnails" id="slide-thumbnails"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="present-overlay" class="hidden">
+    <div class="present-slide" id="present-slide"></div>
+    <div class="present-controls">
+      <button id="present-prev">◀</button>
+      <span id="present-counter">1 / 1</span>
+      <button id="present-next">▶</button>
+      <button id="present-exit">✕ Exit</button>
+    </div>
+    <div class="present-progress">
+      <div id="progress-bar"></div>
+    </div>
+  </div>
+
+  <div id="help-modal" class="modal hidden">
+    <div class="modal-inner">
+      <h2>Keyboard Shortcuts & Syntax</h2>
+      <table>
+        <tr><th>Key</th><th>Action</th></tr>
+        <tr><td>Ctrl+S</td><td>Save</td></tr>
+        <tr><td>Ctrl+P</td><td>Present</td></tr>
+        <tr><td>Ctrl+N</td><td>New slide</td></tr>
+        <tr><td>F5</td><td>Present (fullscreen)</td></tr>
+        <tr><td>Esc</td><td>Exit presentation</td></tr>
+        <tr><td>← →</td><td>Navigate slides in presentation</td></tr>
+      </table>
+      <h3>Markdown Syntax</h3>
+      <pre># Heading 1
+## Heading 2
+**bold** / *italic* / ~~strikethrough~~
+- Unordered list
+1. Ordered list
+> Blockquote
+\`inline code\`
+\`\`\`js
+// code block
+\`\`\`
+[Link text](url)
+![Alt text](image-url)
+---   &lt;-- slide separator</pre>
+      <button id="help-close">Close</button>
+    </div>
+  </div>
+
+  <script src="src/marked.min.js"></script>
+  <script src="src/parser.js"></script>
+  <script src="src/renderer.js"></script>
+  <script src="src/editor.js"></script>
+  <script src="src/presentation.js"></script>
+  <script src="src/storage.js"></script>
+  <script src="src/export.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
