@@ -1,3 +1,7 @@
+## 🚀 Live Demo: [MarkdownSlides](https://ishaansharmathedev.github.io/MarkdownSlides/)
+
+> Try it in your browser: **[https://ishaansharmathedev.github.io/MarkdownSlides/](https://ishaansharmathedev.github.io/MarkdownSlides/)**
+
 # MarkdownSlides
 
 A browser-based Markdown presentation builder. Write slides in Markdown, preview them live, and present full-screen — no installs, no build tools, just open and go.
